@@ -18,48 +18,9 @@ Button {
 }
 
 Input {
-    width: 16;
-}
-
-#note {
-    dock: left;
+    width: 50;
 }
 
 #enter {
     dock: right;
-}
-
-#start {
-    dock: left;
-}
-
-#stop {
-    dock: left;
-    display: none;
-}
-
-#reset {
-    dock: right;
-}
-
-.started {
-    text-style: bold;
-    background: $success;
-    color: $text;
-}
-
-.started TimeDisplay {
-    text-opacity: 100%;
-}
-
-.started #start {
-    display: none
-}
-
-.started #stop {
-    display: block
-}
-
-.started #reset {
-    visibility: hidden
 }

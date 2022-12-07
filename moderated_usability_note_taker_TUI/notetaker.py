@@ -37,7 +37,7 @@ class NoteTakerWidget(Static):
 
     def compose(self) -> ComposeResult:
         """creates child widgets of the NoteWidget."""
-        yield Input("Input", id="note", placeholder="Notes go here.")
+        yield Input("", id="note", placeholder="Notes go here.")
         yield Button("Enter", id="enter", variant="success")
 
 class NotetakerApp(App):
