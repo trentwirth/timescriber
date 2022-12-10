@@ -5,6 +5,8 @@ from textual.containers import Container
 from textual.reactive import reactive
 from textual.widgets import Button, Header, Footer, Static
 
+from pathlib import Path
+import os
 
 class TimeDisplay(Static):
     """A widget to display elapsed time."""
@@ -43,22 +45,36 @@ class TimeDisplay(Static):
         self.total = 0
         self.time = 0
 
+def line_writer(line: str, file_path: Path):
+    with open(file_path,'a') as file:
+        file.write(line)
+        file.write('\n')
 
 class Stopwatch(Static):
     """A stopwatch widget."""
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
         """Event handler called when a button is pressed."""
+
+        path_str = '../file_output/'
+        file_path = os.path.join(path_str, 'test.csv')
+        if not os.path.exists(path_str):
+            os.makedirs(path_str)
+
+
         button_id = event.button.id
         time_display = self.query_one(TimeDisplay)
         if button_id == "start":
             time_display.start()
             self.add_class("started")
+            line_writer(str(time_display.time),file_path)
         elif button_id == "stop":
             time_display.stop()
             self.remove_class("started")
+            line_writer(str(time_display.time),file_path)
         elif button_id == "reset":
             time_display.reset()
+            line_writer(str(time_display.time),file_path)
 
     def compose(self) -> ComposeResult:
         """Create child widgets of a stopwatch."""
