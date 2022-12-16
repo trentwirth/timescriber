@@ -67,14 +67,11 @@ class Stopwatch(Static):
         if button_id == "start":
             time_display.start()
             self.add_class("started")
-            line_writer(str(time_display.time),file_path)
         elif button_id == "stop":
             time_display.stop()
             self.remove_class("started")
-            line_writer(str(time_display.time),file_path)
         elif button_id == "reset":
             time_display.reset()
-            line_writer(str(time_display.time),file_path)
 
     def compose(self) -> ComposeResult:
         """Create child widgets of a stopwatch."""
