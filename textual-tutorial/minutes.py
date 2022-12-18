@@ -11,20 +11,32 @@ def get_timestamp() -> str:
 
 class InputApp(Input):
     async def get_text(self) -> str:
+        print('Text print test')
         return self.Changed.bubble
+
+    async def key_enter(self, TextLog) -> None:
+        print('Printing text for debugging')
+        print(self.value)
+
+        self.value = ''
+
+        # Minutes.key_enter(, 'string2')
+
+        # self.query_one(TextLog).write('String2')
 
 class Minutes(TextLog):
 
-    def on_input_submit(self, event: Input.Submitted) -> None:
-        self.write(get_timestamp())
-        self.write(time.time())
-        self.write(event.__str__)
+    # def on_input_submit(self, event: Input.Submitted) -> None:
+    #     self.write(get_timestamp())
+    #     self.write(time.time())
+    #     self.write(event.__str__)
 
+    # def key_enter(self, s: str) -> None:
+    #     self.write(get_timestamp())
+    #     self.write(time.time())
+    #     self.write(s)
 
-    def key_enter(self) -> None:
-        self.write(get_timestamp())
-        self.write(time.time())
-        self.write("Text will go here.")
+    pass
     
 
 class MinutesApp(App):
@@ -34,7 +46,7 @@ class MinutesApp(App):
 
     def compose(self) -> ComposeResult:
         yield InputApp(classes="input_box")
-        yield Minutes()
+        yield TextLog()
 
 
 if __name__ == "__main__":
