@@ -17,7 +17,7 @@ class TimeDisplay(Static):
 
     def on_mount(self) -> None:
         """Event handler called when widget is added to the app."""
-        self.update_timer = self.set_interval(1 / 60, self.update_time, pause=True)
+        self.update_timer = self.set_interval(1 / 60, self.update_time, pause=False)
 
     def update_time(self) -> None:
         """Method to update time to current."""
@@ -57,11 +57,6 @@ class Stopwatch(Static):
     def on_button_pressed(self, event: Button.Pressed) -> None:
         """Event handler called when a button is pressed."""
 
-        path_str = '../file_output/'
-        file_path = os.path.join(path_str, 'test.csv')
-        if not os.path.exists(path_str):
-            os.makedirs(path_str)
-
 
         button_id = event.button.id
         time_display = self.query_one(TimeDisplay)
@@ -76,8 +71,8 @@ class Stopwatch(Static):
 
     def compose(self) -> ComposeResult:
         """Create child widgets of a stopwatch."""
-        yield Button("Start", id="start", variant="success")
         yield Button("Stop", id="stop", variant="error")
+        yield Button("Start", id="start", variant="success")
         yield Button("Reset", id="reset")
         yield TimeDisplay()
 

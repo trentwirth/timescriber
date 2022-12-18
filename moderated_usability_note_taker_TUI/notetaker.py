@@ -4,13 +4,20 @@ from textual.app import App, ComposeResult
 from textual.containers import Container
 from textual.widgets import Input, Header, Footer, Static
 
+import pathlib as Path
+
 # class NoteTakerWidget(Static):
 #     """A note taking widget"""
 
-#     def compose(self) -> ComposeResult:
-#         """creates child widgets of the NoteWidget."""
-#         yield Input("", id="note", placeholder="Notes go here.")
-        
+def compose(self) -> ComposeResult:
+    """creates child widgets of the NoteWidget."""
+    yield Input("", id="note", placeholder="Notes go here.")
+
+def line_writer(line: str, file_path: Path):
+    with open(file_path,'a') as file:
+        file.write(line)
+        file.write('\n')
+
 class NotetakerApp(App):
     """A Textual app to manage stopwatches."""
 
