@@ -8,12 +8,12 @@ Screen {
     border: wide $primary;
 }
 
-TextLog {  
+Minutes {  
     width: 1fr;
     border: wide green;
 }
 
-TextLog:hover {
+Minutes:hover {
     border: wide yellow;
 }
 
