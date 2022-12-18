@@ -1,5 +1,6 @@
 from textual.app import App, ComposeResult
 from textual.widgets import TextLog
+from textual.widgets import Input
 from textual import events
 
 import time
@@ -8,25 +9,24 @@ import time
 def get_timestamp() -> str:
     return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
 
-class KeyLogger(TextLog):
-    def on_key(self, event: events.Key) -> None:
+class Minutes(TextLog):
+    def key_enter(self) -> None:
         self.write(get_timestamp())
         self.write(time.time())
-        self.write(event)
+        self.write(Input.Changed.bubble.value)
+        
 
 
-class InputApp(App):
-    """App to display key events."""
+class MinutesApp(App):
+    """Description goes here."""
 
-    CSS_PATH = "key03.css"
+    CSS_PATH = "minutes.css"
 
     def compose(self) -> ComposeResult:
-        yield KeyLogger()
-        yield KeyLogger()
-        yield KeyLogger()
-        yield KeyLogger()
+        yield Input(classes="input_box")
+        yield Minutes()
 
 
 if __name__ == "__main__":
-    app = InputApp()
+    app = MinutesApp()
     app.run()

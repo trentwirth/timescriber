@@ -1,0 +1,26 @@
+Screen {
+    layout: horizontal;
+}
+
+.input_box {
+    height: 100%;
+    width: 2fr;
+    border: wide $primary;
+}
+
+Minutes {  
+    width: 1fr;
+    border: wide green;
+}
+
+Minutes:hover {
+    border: wide yellow;
+}
+
+Input:hover {
+    border: wide $secondary;
+}
+
+Input:focus {
+    border: wide $accent;
+}
