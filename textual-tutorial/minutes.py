@@ -9,22 +9,22 @@ import time
 def get_timestamp() -> str:
     return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
 
-class Minutes(TextLog):
-
-    async def key_enter(self, s: str|int) -> None:
-        self.write(get_timestamp())
-        self.write(time.time())
-        self.write(s)
-
 class InputApp(Input):
+
+    class Minutes(TextLog):
+
+        async def log_minutes(self, s: str|int) -> None:
+            self.write(get_timestamp())
+            self.write(time.time())
+            self.write(s)
+
+            print('In log_minutes')
 
     async def key_enter(self) -> None:
 
-        print('Printing text for debugging')
-
         print(self.value)
 
-        self.emit(Minutes.key_enter(TextLog,self.value))
+        self.emit(self.Minutes.log_minutes(self, self.value))
 
         # Clear the text input
         self.value = ''
@@ -39,7 +39,7 @@ class MinutesApp(App):
 
     def compose(self) -> ComposeResult:
         yield InputApp(classes="input_box")
-        yield Minutes()
+        yield InputApp.Minutes()
 
 
 if __name__ == "__main__":
