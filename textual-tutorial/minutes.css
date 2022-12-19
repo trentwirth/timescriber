@@ -1,27 +1,35 @@
 Screen {
-    layout: horizontal;
+    layout: grid;
+    grid-size: 2;
+    grid-gutter: 1;
 }
 
-.input_box {
+InputApp {
     height: 100%;
-    width: 2fr;
+    padding: 1;
+    width: 100%;
     border: wide $primary;
 }
 
-Static {  
-    width: 1fr;
+TextLog {  
+    color: lightgreen;
+    width: 100%;
     border: wide green;
     height: 100%;
 }
 
-/* .file_guts:hover {
-    border: wide yellow;
-} */
+FilePathSetter {
+    padding: 1;
+    border: wide red;
+    width: 100%;
+    height: 100%;
+}
+
 
 Input:hover {
     border: wide $secondary;
 }
 
-Input:focus {
+InputApp:focus {
     border: wide $accent;
 }

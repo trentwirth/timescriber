@@ -1,6 +1,5 @@
 from textual.app import App, ComposeResult
-from textual.containers import Content
-from textual.widgets import Input, Static
+from textual.widgets import Input, TextLog, Static
 # from textual import events
 
 import time
@@ -9,7 +8,6 @@ import csv
 
 
 file_path_str = '/Users/trent/Documents/GitHub/Usability-Testing-TUI/file_output/test.csv' 
-results = str(["starter", "list", "yay"])
 
 def get_timestamp() -> str:
     return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
@@ -19,6 +17,12 @@ def line_writer(line: str, file_path: Path):
         file.write(line)
         file.write('\n')
 
+class FilePathSetter(Input):
+
+    def key_enter(self) -> None:
+
+        print(self.value)
+
 class InputApp(Input):
 
     def key_enter(self) -> None:
@@ -26,21 +30,14 @@ class InputApp(Input):
         print(self.value)
 
         note_string = str(time.time()) + ',' + str(get_timestamp()) + ',' + str(self.value)
+        print_string = str(get_timestamp()) + ' :: ' + str(self.value)
 
         line_writer(note_string, file_path=file_path_str)
 
+        self.screen.query_one(TextLog).write(print_string)
+
         # Clear the text input
         self.value = ''
-
-        with open(file_path_str, newline='') as csvfile:
-
-            file_read = csv.reader(csvfile, delimiter=',')
-
-            print('reading csv')  
-
-            file_read = list(file_read)    
-
-            print(file_read)
 
 class MinutesApp(App):
     """Description goes here."""
@@ -48,8 +45,15 @@ class MinutesApp(App):
     CSS_PATH = "minutes.css"
 
     def compose(self) -> ComposeResult:
-        yield InputApp(classes="input_box")
-        yield Static(results)
+        yield Static(
+            "Wecome to TimeScribe\n"
+                "- Take notes in the blue box (top right)\n"
+                "-- notes are logged in the green box (bottom right)\n"
+                "- Set your file path in the red box (bottom left)"
+            )
+        yield InputApp(placeholder ="Take notes here!", classes="input_box")
+        yield FilePathSetter(placeholder="Set your file path here...")
+        yield TextLog()
 
 if __name__ == "__main__":
     app = MinutesApp()
