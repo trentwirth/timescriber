@@ -52,7 +52,7 @@ class MinutesApp(App):
                 "- Set your file path in the red box (bottom left)"
             )
         yield InputApp(placeholder ="Take notes here!", classes="input_box")
-        yield FilePathSetter(placeholder="Set your file path here...")
+        yield FilePathSetter(placeholder=file_path_str)
         yield TextLog()
 
 if __name__ == "__main__":
