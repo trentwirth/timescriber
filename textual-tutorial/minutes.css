@@ -8,14 +8,15 @@ Screen {
     border: wide $primary;
 }
 
-Minutes {  
+Static {  
     width: 1fr;
     border: wide green;
+    height: 100%;
 }
 
-Minutes:hover {
+/* .file_guts:hover {
     border: wide yellow;
-}
+} */
 
 Input:hover {
     border: wide $secondary;

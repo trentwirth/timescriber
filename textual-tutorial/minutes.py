@@ -1,43 +1,46 @@
 from textual.app import App, ComposeResult
-from textual.widgets import TextLog
-from textual.widgets import Input
-from textual.widgets import Static
-from textual import events
+from textual.containers import Content
+from textual.widgets import Input, Static
+# from textual import events
 
 import time
+import pathlib as Path
+import csv
 
+
+file_path_str = '/Users/trent/Documents/GitHub/Usability-Testing-TUI/file_output/test.csv' 
+results = str(["starter", "list", "yay"])
 
 def get_timestamp() -> str:
     return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
 
+def line_writer(line: str, file_path: Path):
+    with open(file_path,'a') as file:
+        file.write(line)
+        file.write('\n')
+
 class InputApp(Input):
-
-    class Debug_Print():
-
-        def debug_print() -> None:
-            print('debug-001')
 
     def key_enter(self) -> None:
 
         print(self.value)
 
-        Minutes.log_minutes(TextLog, self.value)
+        note_string = str(time.time()) + ',' + str(get_timestamp()) + ',' + str(self.value)
+
+        line_writer(note_string, file_path=file_path_str)
 
         # Clear the text input
         self.value = ''
 
-        InputApp.Debug_Print.debug_print()
+        with open(file_path_str, newline='') as csvfile:
 
-class Minutes(TextLog):
+            file_read = csv.reader(csvfile, delimiter=',')
 
-        def log_minutes(self, s: str|int) -> None:
-            print(get_timestamp())
-            self.write(get_timestamp())
-            self.write(time.time())
-            self.write(s)
+            print('reading csv')  
 
-            print('In log_minutes')
+            file_read = list(file_read)    
 
+            print(file_read)
 
 class MinutesApp(App):
     """Description goes here."""
@@ -46,8 +49,7 @@ class MinutesApp(App):
 
     def compose(self) -> ComposeResult:
         yield InputApp(classes="input_box")
-        yield Minutes()
-
+        yield Static(results)
 
 if __name__ == "__main__":
     app = MinutesApp()
