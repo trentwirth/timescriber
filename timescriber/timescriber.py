@@ -4,8 +4,6 @@ from textual.widgets import Input, TextLog, Static, Header, Footer
 import time
 import os
 import pathlib as Path
-import uuid
-
 
 def get_timestamp() -> str:
     return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
@@ -18,9 +16,12 @@ def line_writer(line: str, file_path: Path):
 ### CREATE OUTPUT FILE ON START ###
 this_file_path = os.getcwd()
 
-session_id = str(uuid.uuid4())
+initialized_timestamp_string = get_timestamp() # I thought about using uuid, but I think that 
+                                               # the time stamp down to tenths of a second is fine-grained enough
 
-output_file_path = this_file_path + '/output/' + get_timestamp() + '_' + session_id + '.csv'
+underscore_string = initialized_timestamp_string.replace(" ", "_")
+
+output_file_path = this_file_path + '/output/' + underscore_string + '.csv'
 
 print(output_file_path)
 
@@ -45,6 +46,11 @@ class TimeScriberApp(App):
     """Description goes here."""
 
     CSS_PATH = "timescriber.css"
+
+    BINDINGS = [
+        ("d", "toggle_dark", "Toggle dark mode"),
+        ("cntrl+C", "quit", "Quit")
+    ]
 
     def compose(self) -> ComposeResult:
         yield Header("TimeScriber")

@@ -13,9 +13,9 @@ InputApp {
 }
 
 TextLog {  
-    color: lightgreen;
+    color: $success;
     width: 100%;
-    border: wide green;
+    border: wide $success;
     height: 100%;
 }
 
