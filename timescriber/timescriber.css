@@ -2,6 +2,7 @@ Screen {
     layout: grid;
     grid-size: 2;
     grid-gutter: 1;
+    grid-rows: 25% 75%;
 }
 
 InputApp {
@@ -18,18 +19,19 @@ TextLog {
     height: 100%;
 }
 
-FilePathSetter {
-    padding: 1;
-    border: wide red;
-    width: 100%;
-    height: 100%;
-}
-
-
 Input:hover {
     border: wide $secondary;
 }
 
 InputApp:focus {
     border: wide $accent;
+}
+
+Static {
+    padding: 1;
+    height: 100%;
+}
+
+.file_path_box {
+    color: green;
 }
