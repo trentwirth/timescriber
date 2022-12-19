@@ -16,6 +16,11 @@ def line_writer(line: str, file_path: Path):
 ### CREATE OUTPUT FILE ON START ###
 this_file_path = os.getcwd()
 
+output_path = this_file_path + '/output/'
+
+if not os.path.exists(output_path):
+    os.makedirs(output_path)
+
 initialized_timestamp_string = get_timestamp() # I thought about using uuid, but I think that 
                                                # the time stamp down to tenths of a second is fine-grained enough
 
