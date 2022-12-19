@@ -13,6 +13,7 @@ InputApp {
 }
 
 TextLog {  
+    padding: 1;
     color: $success;
     width: 100%;
     border: wide $success;
