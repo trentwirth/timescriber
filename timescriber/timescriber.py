@@ -16,7 +16,7 @@ def line_writer(line: str, file_path: Path):
 ### CREATE OUTPUT FILE ON START ###
 this_file_path = os.getcwd()
 
-output_path = this_file_path + '/output/'
+output_path = this_file_path + '\\timescriber_output\\'
 
 if not os.path.exists(output_path):
     os.makedirs(output_path)
@@ -25,8 +25,9 @@ initialized_timestamp_string = get_timestamp() # I thought about using uuid, but
                                                # the time stamp down to tenths of a second is fine-grained enough
 
 underscore_string = initialized_timestamp_string.replace(" ", "_")
+clean_string = underscore_string.replace(":", "-")
 
-output_file_path = this_file_path + '/output/' + underscore_string + '.csv'
+output_file_path = output_path + clean_string + '.csv'
 
 print(output_file_path)
 
