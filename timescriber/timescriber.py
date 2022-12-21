@@ -33,6 +33,7 @@ clean_string = underscore_string.replace(":", "-")
 
 output_file_path = output_path + clean_string + '.csv'
 
+## print output file path, just to be safe. To be clear, this should be printed to your terminal. 
 print(output_file_path)
 
 f = open(output_file_path, "x")
