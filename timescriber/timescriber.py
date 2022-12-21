@@ -54,7 +54,7 @@ class InputApp(Input):
         self.value = ''
 
 class TimeScriberApp(App):
-    """Description goes here."""
+    """An app for taking timestamped notes. Saves notes to a `csv` file."""
 
     CSS_PATH = "timescriber.css"
 
