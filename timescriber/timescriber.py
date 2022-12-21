@@ -1,5 +1,6 @@
 from textual.app import App, ComposeResult
 from textual.widgets import Input, TextLog, Static, Header, Footer
+from sys import platform
 
 import time
 import os
@@ -16,7 +17,10 @@ def line_writer(line: str, file_path: Path):
 ### CREATE OUTPUT FILE ON START ###
 this_file_path = os.getcwd()
 
-output_path = this_file_path + '\\timescriber_output\\'
+if platform == 'win32':
+    output_path = this_file_path + '\\timescriber_output\\'
+elif platform == 'darwin' or platform == 'linux' or platform == 'linux2':
+    output_path = this_file_path + '/timescriber_output/'
 
 if not os.path.exists(output_path):
     os.makedirs(output_path)
