@@ -53,7 +53,6 @@ class TimeScriberApp(App):
     CSS_PATH = "timescriber.css"
 
     BINDINGS = [
-        ("d", "toggle_dark", "Toggle dark mode"),
         ("cntrl+C", "quit", "Quit")
     ]
 
