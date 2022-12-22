@@ -73,7 +73,7 @@ class TimeScriberApp(App):
         "\n"
         + str(output_file_path), classes="file_path_box"
         )
-        yield InputApp(placeholder ="Take notes here!", classes="input_box")
+        yield InputApp(placeholder ="Take notes here!")
         yield TextLog()
         yield Footer()
 

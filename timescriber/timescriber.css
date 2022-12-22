@@ -8,31 +8,31 @@ Screen {
 InputApp {
     height: 100%;
     padding: 1;
-    width: 100%;
     border: wide $primary;
 }
 
 TextLog {  
     padding: 1;
     color: $success;
-    width: 100%;
     border: wide $success;
-    height: 100%;
 }
 
 Input:hover {
     border: wide $secondary;
 }
 
-InputApp:focus {
+Input:focus {
     border: wide $accent;
 }
 
 Static {
     padding: 1;
-    height: 100%;
 }
 
 .file_path_box {
     color: green;
+}
+
+.bottom_row {
+    
 }
