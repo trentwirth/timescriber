@@ -1,13 +1,16 @@
 from textual.app import App, ComposeResult
 from textual.widgets import Input, TextLog, Static, Header, Footer
-from sys import platform
+from pathlib import Path
 
-import time
 import os
-import pathlib as Path
+import sys
+import time
 
-def get_timestamp() -> str:
-    return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
+base_package_path = Path(__file__).parent.parent
+print(f"adding base_package_path: {base_package_path} : to sys.path")
+sys.path.insert(0, str(base_package_path)) # add parent directory to sys.path
+
+from timescriber.tools.get_timestamp import get_timestamp
 
 def line_writer(line: str, file_path: Path):
     with open(file_path,'a') as file:
@@ -17,9 +20,9 @@ def line_writer(line: str, file_path: Path):
 ### CREATE OUTPUT FILE ON START ###
 this_file_path = os.getcwd()
 
-if platform == 'win32':
+if sys.platform == 'win32':
     output_path = this_file_path + '\\timescriber_output\\'
-elif platform == 'darwin' or platform == 'linux' or platform == 'linux2':
+elif sys.platform == 'darwin' or sys.platform == 'linux' or sys.platform == 'linux2':
     output_path = this_file_path + '/timescriber_output/'
 
 if not os.path.exists(output_path):
