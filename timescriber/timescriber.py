@@ -12,12 +12,9 @@ sys.path.insert(0, str(base_package_path)) # add parent directory to sys.path
 
 from timescriber.utilities.get_timestamp import get_timestamp
 from timescriber.utilities.system_configuration import get_default_output_file_path
+from timescriber.utilities.line_writer import line_writer
 
-def line_writer(line: str, file_path: Path):
-    with open(file_path,'a') as file:
-        file.write(line)
-        file.write('\n')
-
+OUTPUT_FILE_PATH = get_default_output_file_path() # global variable so that it's accessible in InputApp
 
 class InputApp(Input):
 
@@ -26,7 +23,7 @@ class InputApp(Input):
         note_string = str(time.time()) + ',' + str(get_timestamp()) + ',' + str(self.value)
         print_string = str(get_timestamp()) + ' :: ' + str(self.value)
 
-        line_writer(note_string, file_path=output_file_path)
+        line_writer(note_string, file_path=OUTPUT_FILE_PATH)
 
         self.screen.query_one(TextLog).write(print_string)
 
@@ -43,8 +40,10 @@ class TimeScriberApp(App):
     ]
 
     def compose(self) -> ComposeResult:
-        self._output_file_path = get_default_output_file_path()
-        self._file = open(self._output_file_path, "x")
+        # self._output_file_path = get_default_output_file_path()
+        # self._file = open(self._output_file_path, "x")
+        self._file = open(OUTPUT_FILE_PATH, "x")
+
         yield Header("TimeScriber")
         yield Static(
             "Wecome to TimeScriber\n"
@@ -53,7 +52,8 @@ class TimeScriberApp(App):
         yield Static(
         "Below is the path for the file you are writing to:\n"
         "\n"
-        + str(self._output_file_path), classes="file_path_box"
+        # + str(self._output_file_path), classes="file_path_box"
+        + str(OUTPUT_FILE_PATH), classes="file_path_box"
         )
         yield InputApp(placeholder ="Take notes here!")
         yield TextLog()
