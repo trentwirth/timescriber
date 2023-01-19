@@ -10,37 +10,14 @@ base_package_path = Path(__file__).parent.parent
 print(f"adding base_package_path: {base_package_path} : to sys.path")
 sys.path.insert(0, str(base_package_path)) # add parent directory to sys.path
 
-from timescriber.tools.get_timestamp import get_timestamp
+from timescriber.utilities.get_timestamp import get_timestamp
+from timescriber.utilities.system_configuration import get_default_output_file_path
 
 def line_writer(line: str, file_path: Path):
     with open(file_path,'a') as file:
         file.write(line)
         file.write('\n')
 
-### CREATE OUTPUT FILE ON START ###
-this_file_path = os.getcwd()
-
-if sys.platform == 'win32':
-    output_path = this_file_path + '\\timescriber_output\\'
-elif sys.platform == 'darwin' or sys.platform == 'linux' or sys.platform == 'linux2':
-    output_path = this_file_path + '/timescriber_output/'
-
-if not os.path.exists(output_path):
-    os.makedirs(output_path)
-
-initialized_timestamp_string = get_timestamp() # I thought about using uuid, but I think that 
-                                               # the time stamp down to tenths of a second is fine-grained enough
-
-underscore_string = initialized_timestamp_string.replace(" ", "_")
-clean_string = underscore_string.replace(":", "-")
-
-output_file_path = output_path + clean_string + '.csv'
-
-## print output file path, just to be safe. To be clear, this should be printed to your terminal. 
-print(output_file_path)
-
-f = open(output_file_path, "x")
-###################################
 
 class InputApp(Input):
 
@@ -62,10 +39,12 @@ class TimeScriberApp(App):
     CSS_PATH = "timescriber.css"
 
     BINDINGS = [
-        ("cntrl+C", "quit", "Quit")
+        ("ctrl+C", "quit", "Quit")
     ]
 
     def compose(self) -> ComposeResult:
+        self._output_file_path = get_default_output_file_path()
+        self._file = open(self._output_file_path, "x")
         yield Header("TimeScriber")
         yield Static(
             "Wecome to TimeScriber\n"
@@ -74,7 +53,7 @@ class TimeScriberApp(App):
         yield Static(
         "Below is the path for the file you are writing to:\n"
         "\n"
-        + str(output_file_path), classes="file_path_box"
+        + str(self._output_file_path), classes="file_path_box"
         )
         yield InputApp(placeholder ="Take notes here!")
         yield TextLog()
