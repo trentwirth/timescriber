@@ -48,7 +48,7 @@ class TimeScriberApp(App):
         yield Static(
             "Wecome to TimeScriber\n"
                 "- Take notes in the blue box (bottom left)\n"
-                "- Notes are logged in the green box (bottom right)"            )
+                "- Notes are logged in the green box (bottom right)")
         yield Static(
         "Below is the path for the file you are writing to:\n"
         "\n"
