@@ -2,7 +2,6 @@ from textual.app import App, ComposeResult
 from textual.widgets import Input, TextLog, Static, Header, Footer
 from pathlib import Path
 
-import os
 import sys
 import time
 
