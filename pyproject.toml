@@ -1,0 +1,47 @@
+# pyproject.toml
+
+[build-system]
+requires      = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "TimeScriber"
+version = "0.0.0"
+description = "A note taking app that timestamps your notes"
+readme = "README.md"
+authors = [{ name = "Trenton Wirth"}]
+license = { file = "LICENSE" }
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
+keywords = [
+"notes", 
+"textual", 
+"timestamps",
+"TUI"
+]
+
+dependencies = [
+    "textual",
+    "click",
+    "python",
+    "toml",
+    "pytest"
+]
+requires-python = ">=3.10.8"
+
+[tool.bumpver]
+current_version = "v2023.01.19.1115.dev"
+version_pattern = "vYYYY.0M.0D.MICRO[-TAG]"
+commit_message  = "Bump version {old_version} -> {new_version}"
+commit          = true
+tag             = true
+push            = true
+
+[project.optional-dependencies]
+dev = ["black", "bumpver", "isort", "pip-tools", "pytest"]
+
+[project.scripts]
+timescriber = "timescriber.__main__:main"
