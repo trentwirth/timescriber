@@ -1,4 +1,4 @@
-# `TimeScriber` TUI
+# `TimeScriber`, a textual user interface (TUI) app
 A note taking app that timestamps your notes! Built off of TUI (https://textual.textualize.io/) to create a simple platform for recording meeting minutes and taking notes during usability testing.
 
 `TimeScriber` is a ✨Work in Progress✨
